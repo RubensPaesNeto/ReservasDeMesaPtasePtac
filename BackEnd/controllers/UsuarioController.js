@@ -97,6 +97,11 @@ class UsuarioController{
     next()
 
   }
+  static testeAdmin(req,res){
+  res.json({
+          msg: "Você é um Adimin"
+      })
+  }
 }
 
 module.exports = UsuarioController;
