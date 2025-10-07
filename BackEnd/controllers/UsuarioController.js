@@ -7,6 +7,7 @@ const client = new PrismaClient()
 
 class UsuarioController {
   static async cadastrar(req, res) {
+    try{ 
     const { nome, email, password, tipo } = req.body
 
     const salt = bcryptjs.genSaltSync(8)
@@ -22,33 +23,46 @@ class UsuarioController {
     })
 
     res.json({
-      usuarioId: usuario.id,
+       mensagem: "Exito ao cadastrar!",
+       erro: false,
     });
+  } catch(err){
+    res.json({
+       mensagem: "Erro ao cadastrar!",
+       erro: true,
+       mensademDeErro: err
+    })
   }
+}
 
   static async login(req, res) {
     const { email, password } = req.body;
     //verificar se o usuario existe
     const usuario = await client.usuario.findUnique({
       where: {
-        email: email,
+        email: email
       },
     })
     if (!usuario) {
       return res.json({
-        msg: "Usuário não encontrado!",
+       mensagem: "Usuario não encontrado",
+       erro: true
       })
     }
     //verificar se a senha esta correta
     const senhaCorreta = bcryptjs.compareSync(password, usuario.password)
     if (!senhaCorreta) {
-      return res.json({ msg: "Senha Incorreta!" })
+      return res.json({
+       mensagem: "Senha Incorreta",
+       erro: true
+      })
     }
     //emitir um token
     const token = jwt.sign({ id: usuario.id }, process.env.SENHA_SERVIDOR, { expiresIn: "2h" })
     res.json({
-      msg: "Autenticado!",
-      token: token,
+      mensagem: "Autenticado!",
+      erro: false,
+      token: token
     });
   }
 
@@ -61,7 +75,8 @@ class UsuarioController {
       jwt.verify(token, process.env.SENHA_SERVIDOR, (err, payload) => {
         if (err) {
           return res.json({
-            msg: "token invalido!",
+            mensagem: "token invalido!",
+            erro: true
           })
         }
 
@@ -71,7 +86,8 @@ class UsuarioController {
 
     } else {
       return res.json({
-        msg: "token não encontrado",
+        mensagem: "token não encontrado",
+        erro: true
       })
     }
   }
@@ -79,7 +95,8 @@ class UsuarioController {
   static async verificaIsAdmin(req, res, next) {
     if (!req.usuarioId) {
       return res.json({
-        msg: "você não está autenticado"
+        mensagem: "você não está autenticado",
+        erro: true
       })
     }
 
@@ -91,7 +108,8 @@ class UsuarioController {
 
     if (usuario.tipo !== "admin") {
       return res.json({
-        msg: "Acesso negado, você não é um administrador"
+        mensagem: "Acesso negado, você não é um administrador",
+        erro: true
       })
     }
 
@@ -100,12 +118,12 @@ class UsuarioController {
   }
   static testeAdmin(req, res) {
     res.json({
-      msg: "Você é um Admin"
+      mensagem: "Você é um Admin"
     })
   }
   static paginaHome(req, res) {
     res.json({
-      msg: "Você está na pagina Home"
+      mensagem: "Você está na pagina Home"
     })
   }
 }
