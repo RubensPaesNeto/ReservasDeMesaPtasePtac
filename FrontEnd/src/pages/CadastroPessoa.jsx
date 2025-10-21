@@ -10,16 +10,33 @@ export default function Cadastro() {
   async function registerUser(e) {
     e.preventDefault();
 
-    // 🔹 placeholder - integração futura
-    try {
-      // const res = await api.post("/register", { nome, email, password });
-      console.log("Cadastro:", { nome, email, password });
-      alert("Usuário cadastrado (simulação).");
-    } catch (err) {
-      alert("Erro ao cadastrar usuário.");
-    }
-  }
+  const novaPessoa = { nome, email, password };
 
+    try {
+      const response = await fetch('http://localhost:3000/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novaPessoa)
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao cadastrar pessoa');
+      }
+
+      const dados = await response.json();
+      setMensagem(`Pessoa ${dados.nome} cadastrada com sucesso!`);
+
+      // Limpar o formulário
+      setNome('');
+      setEmail('');
+      setPassword('')
+    } catch (error) {
+      console.error('Erro:', error);
+      setMensagem('Erro ao cadastrar. Tente novamente.');
+    }
+  };
   return (
     <div className="cadastro-container">
       <h2>Cadastro</h2>

@@ -1,6 +1,7 @@
 import React from "react";
 import "../css/Home.module.css";
 
+
 export default function Home() {
   return (
     <div className="home-container">
@@ -9,7 +10,7 @@ export default function Home() {
 
       <div className="buttons">
         <button>Login</button>
-        <button>Cadastro</button>
+        <button a="">Cadastro</button>
         <button>Perfil</button>
         <button>Atualizar Perfil</button>
         <button>Cadastrar Mesas</button>
