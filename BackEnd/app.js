@@ -13,4 +13,7 @@ app.use(cors({
 const UsuariosRoutes = require("./routes/UsuarioRoute.js")
 app.use("/usuarios", UsuariosRoutes)
 
+const MesaRouter = require("./routes/MesaRoute.js")
+app.use("/mesa", MesaRouter)
+
 module.exports = app
