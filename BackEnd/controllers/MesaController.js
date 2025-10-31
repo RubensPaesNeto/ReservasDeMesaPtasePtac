@@ -18,7 +18,7 @@ class MesaController {
       });
     } catch (err) {
       res.json({
-        mensagem: "Erro ao cadastrar!",
+        mensagem: "Erro ao cadastrar, código ja existente",
         erro: true,
         mensademDeErro: err
       })
