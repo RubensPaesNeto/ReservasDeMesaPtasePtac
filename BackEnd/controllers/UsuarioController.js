@@ -198,6 +198,26 @@ class UsuarioController {
     });
   }
 }
+ static async buscarUsuarios(req, res) {
+    try {
+      const procurarUsuarios = await client.usuario.findMany({})
+      res.json({
+        mensagem: "Usuarios Buscados com sucesso",
+        erro: false,
+       usuarios: {
+          nome: procurarUsuarios.nome,
+          email: procurarUsuarios.email,
+          tipo: procurarUsuarios.tipo
+        }
+      })
+    } catch (err) {
+      res.json({
+        mensagem: "Usuarios não encontrados",
+        erro: true,
+        mensademDeErro: err
+      })
+    }
+}
 }
 
 module.exports = UsuarioController;

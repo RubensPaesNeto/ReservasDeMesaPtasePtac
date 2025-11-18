@@ -14,4 +14,6 @@ router.get("/perfil", UsuarioController.verificaAutenticacao, UsuarioController.
 
 router.patch("/perfil", UsuarioController.verificaAutenticacao, UsuarioController.atualizarMeuPerfil)
 
+router.get("/perfil/todos", UsuarioController.verificaAutenticacao, UsuarioController.verificaIsAdmin, UsuarioController.buscarUsuarios);
+
 module.exports = router
