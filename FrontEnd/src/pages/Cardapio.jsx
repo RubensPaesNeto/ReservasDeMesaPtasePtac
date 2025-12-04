@@ -50,7 +50,7 @@ export default function Cardapio() {
 
       <main className={styles["menu-container"]}>
         
-        {/* FILTRO */}
+ 
         <div className={styles["menu-controls"]}>
           <input
             className={styles["menu-search"]}
@@ -72,7 +72,7 @@ export default function Cardapio() {
           </select>
         </div>
 
-        {/* ITENS */}
+
         <section className={styles["menu-grid"]}>
           {filtered.map(item => (
             <article className={styles["menu-card"]} key={item.id}>

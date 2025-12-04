@@ -9,7 +9,6 @@ export default function MinhasReservas() {
   const [data, setData] = useState("");
   const [resultado, setResultado] = useState(null);
 
-  // 🔸 OBJETO FICTÍCIO COM 5 RESERVAS
   const reservas = [
     { mesa: "1", reserva: "100", data: "2025-11-30", nome: "Carlos Silva" },
     { mesa: "2", reserva: "101", data: "2025-12-01", nome: "Ana Souza" },
@@ -19,7 +18,7 @@ export default function MinhasReservas() {
   ];
 
   const consultar = () => {
-    // verifica por qualquer combinação dos campos preenchidos
+
     const achado = reservas.find((r) => {
       return (
         (mesa === "" || r.mesa === mesa) &&
@@ -70,7 +69,6 @@ export default function MinhasReservas() {
             Consultar
           </button>
 
-          {/* 🔸 Resultado da busca */}
           {resultado && (
             <div style={{ marginTop: "15px", color: "#6b2d12", fontWeight: "bold" }}>
               {resultado === "não encontrado" ? (

@@ -14,20 +14,18 @@ export default function ListarReservas(){
   const [modoEdicao, setModoEdicao] = useState(false);
   const [novaData, setNovaData] = useState("");
 
-  //  Ver detalhes
+
   const verDetalhes = (reserva) => {
     setReservaSelecionada(reserva);
     setModoEdicao(false);
   };
 
-  //  Editar reserva (mostra campo de data)
   const editarReserva = (reserva) => {
     setReservaSelecionada(reserva);
     setModoEdicao(true);
     setNovaData(reserva.data);
   };
 
-  //  Salvar edição
   const salvarEdicao = () => {
     setReservas((prev) =>
       prev.map((r) =>
@@ -40,7 +38,7 @@ export default function ListarReservas(){
     setReservaSelecionada(null);
   };
 
-  //  Cancelar reserva (remove da lista)
+
   const cancelarReserva = (numeroReserva) => {
     const confirmar = window.confirm(`Tem certeza que deseja cancelar a reserva nº ${numeroReserva}?`);
     if (confirmar) {
@@ -93,7 +91,6 @@ export default function ListarReservas(){
         </tbody>
       </table>
 
-      {/* Se uma reserva foi selecionada, mostra abaixo */}
       {reservaSelecionada && !modoEdicao && (
         <div style={{ marginTop: "20px", border: "1px solid #ccc", padding: "10px", borderRadius: "4px" }}>
           <h3>Detalhes da Reserva</h3>

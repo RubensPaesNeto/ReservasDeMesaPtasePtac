@@ -9,7 +9,7 @@ export default function ConsultarMesas() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/mesa/mesas"); // Endpoint que retorna todas as mesas
+      const response = await fetch("http://localhost:3000/mesa/mesas"); 
 
       if (!response.ok) {
         throw new Error("Erro ao consultar mesas");
